@@ -18,6 +18,7 @@ export const StringComponent: React.FC = () => {
   const onClick = () => {
     setloading(true);
     const arrStringStates = getArrStates2(arrKeys, inputValue.value.split(""));
+    console.log(arrStringStates)
     if (arrStringStates.length == 1) {
       let arrCopy: arrString[] = Array.from(arrStringStates);
       arrCopy[0].state = ElementStates.Modified;

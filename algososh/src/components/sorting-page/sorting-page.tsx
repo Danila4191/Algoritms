@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styles from "./sorting.module.css";
 import { RadioInput } from "../ui/radio-input/radio-input";
 import { Button } from "../ui/button/button";
@@ -27,6 +27,9 @@ export const SortingPage: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    createArrRandom(0, 100, 3, 17, setArrRandom, arrKeys)
+  }, []);
   //////////////////////////////////////////////////////////////////
   const sortBubble = (
     arr: arrSortingnumbers[],

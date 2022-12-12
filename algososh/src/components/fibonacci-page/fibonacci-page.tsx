@@ -51,6 +51,7 @@ export const FibonacciPage: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.imput}>
           <Input
+          value={inputValue.value}
             onChange={onChange}
             type="fibonacci"
             max={19}

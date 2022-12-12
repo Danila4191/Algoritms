@@ -24,6 +24,8 @@ export const QueuePage: React.FC = () => {
   const [lengthState, setlengthState] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
+  //Тут компоненты тесно связанны с классами из-за использования стейтов.
+  //Как мне кажется лучше оставить их здесь, чтобы не усложнять логику страницы.
   class Queue<T> implements IQueue<T> {
     private container: (arrString | null)[] = [];
     private head = headState;
@@ -122,7 +124,7 @@ export const QueuePage: React.FC = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue({ ...inputValue, value: e.target.value });
   };
-console.log(queue.getLength())
+
   return (
     <SolutionLayout title="Очередь">
       <div className={styles.container}>
@@ -147,7 +149,7 @@ console.log(queue.getLength())
             linkedList="small"
             text="Удалить"
             isLoader={loading}
-            disabled={(loading || (queue.getLength() == 0)) ? true : false}
+            disabled={loading || queue.getLength() == 0 ? true : false}
           />
 
           <div className={styles.button}>
@@ -158,13 +160,13 @@ console.log(queue.getLength())
               linkedList="small"
               text="Очистить"
               isLoader={loading}
-              disabled={ (loading || (queue.getLength() == 0)) ? true : false}
+              disabled={loading || queue.getLength() == 0 ? true : false}
             />
           </div>
         </div>
         <div className={styles.algo__box}>
           {arr !== undefined
-            ? arr.map((srting: any, index: number) => (
+            ? arr.map((srting: arrString, index: number) => (
                 <Circle
                   key={index}
                   state={srting.state}

@@ -35,9 +35,9 @@ export interface IQueue<T> {
   dequeue: () => void;
 }
 export  interface ILinkedList<T> {
-  append: (item: any) => void;
-  prepend: (item:any) => void;
-  addByIndex: (item: any, position: number) => void;
+  append: (item: arrString) => void;
+  prepend: (item:number) => void;
+  addByIndex: (item: arrString, position: number) => void;
   deleteByIndex: (index: number) => void;
   find: (index: number) => void;
   getSize: () => number;

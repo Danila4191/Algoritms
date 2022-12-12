@@ -15,6 +15,9 @@ export const StackPage: React.FC = () => {
   });
   const [arr, setArr] = useState<arrString[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  //Тут компоненты тесно связанны с классами из-за использования стейтов.
+  //Как мне кажется лучше оставить их здесь, чтобы не усложнять логику страницы.
   class Stack<T> implements IStack<T> {
     private container: arrString[] = arr;
 
@@ -57,11 +60,12 @@ export const StackPage: React.FC = () => {
     getSize = () => this.container.length;
     getElements = () => this.container;
   }
-
   const st = new Stack<string>();
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue({ ...inputValue, value: e.target.value });
   };
+
+
 
   return (
     <SolutionLayout title="Стек">
@@ -98,7 +102,7 @@ export const StackPage: React.FC = () => {
         </div>
         <div className={styles.algo__box}>
           {arr !== undefined
-            ? arr.map((srting: any, index: number) => (
+            ? arr.map((srting: arrString, index: number) => (
                 <Circle
                   key={index}
                   state={srting.state}

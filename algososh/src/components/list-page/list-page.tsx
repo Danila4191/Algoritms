@@ -8,6 +8,7 @@ import { ElementStates, arrString, ILinkedList } from "../../types/types";
 import { ArrowIcon } from "../../components/ui/icons/arrow-icon";
 import { arrKeys } from "../../utils/constants";
 import { createArrRandom } from "../../utils/functions";
+import { LinkedList } from "../../class/linkedList";
 export const ListPage: React.FC = () => {
   const [inputValueOne, setInputValueOne] = useState<any>({
     value: "",
@@ -17,7 +18,7 @@ export const ListPage: React.FC = () => {
   const [arr, setArr] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-
+  
   useEffect(() => {
     arrKeys.push("smalCircle");
     createArrRandom(0, 10000, 4, 6, setArr, arrKeys);
@@ -28,108 +29,11 @@ export const ListPage: React.FC = () => {
     setInputValueOne({ ...inputValueOne, value: e.target.value });
   };
   const onChangeTwo = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     setInputValueTwo(+e.currentTarget.value);
   };
 
-  class Node<T> {
-    value: T;
-    next: Node<T> | null;
-    constructor(value: T, next?: Node<T> | null) {
-      this.value = value;
-      this.next = next === undefined ? null : next;
-    }
-  }
-  class LinkedList<T> implements ILinkedList<T> {
-    private head: Node<T> | null;
-    private size: number;
-    constructor(arr: T[]) {
-      this.head = null;
-      this.size = 0;
-      arr.forEach((el) => this.addByIndex(el, 0));
-    }
-
-    append = (item: any) => {
-      const node = new Node(item);
-      let head;
-      if (this.head === null) {
-        this.head = node;
-      } else {
-        head = this.head;
-        while (head.next) {
-          head = head.next;
-        }
-        head.next = node;
-      }
-      this.size++;
-    };
-
-    prepend = (value: any) => {
-      let node = new Node(value);
-      if (!this.head) {
-        this.head = node;
-      }
-      node.next = this.head;
-      this.head = node;
-      this.size++;
-    };
-
-    find = (index: number) => {
-      if (index < 0 || index > this.size) console.log("Enter a valid index");
-      let currentNode = this.head;
-      let count = 0;
-      while (currentNode) {
-        if (count === index) {
-          return currentNode.value;
-        }
-        count++;
-        currentNode = currentNode.next;
-      }
-      return null;
-    };
-
-    deleteByIndex = (index: number) => {
-      if (index < 0 || index > this.size) console.log("Enter a valid index");
-      let head = this.head;
-      if (head && index === 0) {
-        this.head = head.next;
-      } else {
-        for (let i = 0; head != null && i < index - 1; i++) {
-          head = head.next;
-        }
-        if (head == null || head.next == null) return null;
-        const { next } = head.next;
-        head.next = next;
-      }
-      this.size -= 1;
-    };
-
-    addByIndex = (item: any, index: number) => {
-      if (index < 0 || index > this.getSize())
-        console.log("Enter a valid index");
-      else {
-        const node = new Node(item);
-        if (index === 0) {
-          node.next = this.head;
-          this.head = node;
-        } else if (this.head) {
-          let head = this.head;
-          let headIndex = 0;
-          while (headIndex + 1 < index && head.next) {
-            head = head.next;
-            headIndex++;
-          }
-          const temp = head.next;
-          head.next = node;
-          node.next = temp;
-        }
-        this.size++;
-      }
-    };
-
-    getSize() {
-      return this.size;
-    }
-  }
+  
   const list = new LinkedList<string>(arr);
  
 
@@ -166,7 +70,7 @@ export const ListPage: React.FC = () => {
 
   const addTail = (inputValueOne: arrString) => {
     setLoading(true);
-    list.append(inputValueOne.value);
+    list.append(inputValueOne);
     const length = arr.length;
     arr[length - 1] = {
       ...arr[length - 1],
@@ -388,6 +292,8 @@ export const ListPage: React.FC = () => {
             value={inputValueTwo}
             placeholder="введите индекс"
             onChange={onChangeTwo}
+            max={5}
+            type="number"
           />
 
           <Button
@@ -395,7 +301,7 @@ export const ListPage: React.FC = () => {
             linkedList="big"
             text="Добавить по индексу"
             isLoader={loading}
-            disabled={loading || (inputValueOne.value === "" && true)}
+            disabled={loading || (inputValueOne.value === "" && true) || inputValueTwo > arr.length - 1 }
           />
 
           <Button
@@ -403,7 +309,7 @@ export const ListPage: React.FC = () => {
             linkedList="big"
             text="Удалить по индексу"
             isLoader={loading}
-            disabled={loading || (arr.length < 2 ? true : false)}
+            disabled={loading || (arr.length < 2 ? true : false) || inputValueTwo > arr.length - 1}
           />
         </div>
 
