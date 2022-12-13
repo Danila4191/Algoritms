@@ -292,7 +292,7 @@ export const ListPage: React.FC = () => {
             value={inputValueTwo}
             placeholder="введите индекс"
             onChange={onChangeTwo}
-            max={5}
+            max={arr.length - 1}
             type="number"
           />
 
