@@ -293,6 +293,7 @@ export const ListPage: React.FC = () => {
             placeholder="введите индекс"
             onChange={onChangeTwo}
             max={arr.length - 1}
+            min={0}
             type="number"
           />
 
@@ -301,7 +302,7 @@ export const ListPage: React.FC = () => {
             linkedList="big"
             text="Добавить по индексу"
             isLoader={loading}
-            disabled={loading || (inputValueOne.value === "" && true) || inputValueTwo > arr.length - 1 }
+            disabled={loading || (inputValueOne.value === "" && true) || inputValueTwo > arr.length - 1 || inputValueTwo < 0}
           />
 
           <Button
@@ -309,7 +310,7 @@ export const ListPage: React.FC = () => {
             linkedList="big"
             text="Удалить по индексу"
             isLoader={loading}
-            disabled={loading || (arr.length < 2 ? true : false) || inputValueTwo > arr.length - 1}
+            disabled={loading || (arr.length < 2 ? true : false) ||  inputValueTwo > arr.length - 1 || inputValueTwo < 0}
           />
         </div>
 
