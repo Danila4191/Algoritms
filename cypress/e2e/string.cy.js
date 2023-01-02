@@ -1,6 +1,7 @@
+import {circle,colorBorderChanging,colorBorderModifed}  from "../../src/utils/constants"
 describe("Проверка блокировки кнопки при пустом инпуте", function () {
   beforeEach(function () {
-    cy.visit("http://localhost:3000/recursion");
+    cy.visit("/recursion");
   });
 
   it("Проверка блокировки кнопки при пустом инпуте", function () {
@@ -10,7 +11,7 @@ describe("Проверка блокировки кнопки при пустом
   it("Проверьте, что строка разворачивается корректно", function () {
     cy.get("input").type("misterZ").should("have.value", "misterZ");
     cy.contains("Развернуть").click();
-    cy.get("[class*=circle_circle]").as("circle");
+    cy.get(circle).as("circle");
     ///////////////////////////первый
     cy.get("@circle")
       .should("have.length", 7)
@@ -27,7 +28,7 @@ describe("Проверка блокировки кнопки при пустом
           cy.wrap(item).should(
             "have.css",
             "border",
-            "4px solid rgb(210, 82, 225)"
+            colorBorderChanging
           );
         }
       });
@@ -40,7 +41,7 @@ describe("Проверка блокировки кнопки при пустом
         cy.wrap(item).should(
           "have.css",
           "border",
-          "4px solid rgb(127, 224, 81)"
+          colorBorderModifed
         );
       }
     });
@@ -52,7 +53,7 @@ describe("Проверка блокировки кнопки при пустом
         cy.wrap(item).should(
           "have.css",
           "border",
-          "4px solid rgb(210, 82, 225)"
+          colorBorderChanging
         );
       }
     });
@@ -64,7 +65,7 @@ describe("Проверка блокировки кнопки при пустом
         cy.wrap(item).should(
           "have.css",
           "border",
-          "4px solid rgb(127, 224, 81)"
+          colorBorderModifed
         );
       }
     });
@@ -76,7 +77,7 @@ describe("Проверка блокировки кнопки при пустом
         cy.wrap(item).should(
           "have.css",
           "border",
-          "4px solid rgb(210, 82, 225)"
+          colorBorderChanging
         );
       }
     });
@@ -88,7 +89,7 @@ describe("Проверка блокировки кнопки при пустом
         cy.wrap(item).should(
           "have.css",
           "border",
-          "4px solid rgb(127, 224, 81)"
+          colorBorderModifed
         );
       }
     });
@@ -99,7 +100,7 @@ describe("Проверка блокировки кнопки при пустом
         cy.wrap(item).should(
           "have.css",
           "border",
-          "4px solid rgb(127, 224, 81)"
+          colorBorderModifed
         );
       }
     });

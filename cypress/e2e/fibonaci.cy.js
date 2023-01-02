@@ -1,9 +1,9 @@
-
+import {circle}  from "../../src/utils/constants"
 describe("Проверьте, что числа генерируются корректно", function () {
   beforeEach(function () {
-    cy.visit("http://localhost:3000/fibonacci");
+    cy.visit("/fibonacci");
   });
-
+ 
   it("Проверьте, что если в инпуте пусто, то кнопка добавления недоступна", function () {
     cy.get("input").should("have.value", "");
     cy.get("button").should("have.disabled", "true");
@@ -11,7 +11,7 @@ describe("Проверьте, что числа генерируются кор�
   it("Проверьте, что числа генерируются корректно", function () {
     cy.get("input").type("19").should("have.value", "19");
     cy.contains("Рассчитать").click();
-    cy.get("[class*=circle_circle]").as("circle");
+    cy.get(circle).as("circle");
     cy.get("@circle")
       .should("have.length", 1)
       .each((item, index) => {

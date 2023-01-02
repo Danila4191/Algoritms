@@ -1,8 +1,8 @@
-
+import {circleContainer,circle,colorBorderChanging,colorBorderDefoult}  from "../../src/utils/constants"
 
 describe("Проверьте, правильность добавления элемента в очередь", function () {
   beforeEach(function () {
-    cy.visit("http://localhost:3000/queue");
+    cy.visit("/queue");
   });
   it("Проверка блокировки кнопки при пустом инпуте", function () {
     cy.get("input").should("have.value", "");
@@ -11,7 +11,7 @@ describe("Проверьте, правильность добавления эл
   it("Проверьте, правильность добавления элемента в очередь", function () {
     cy.get("input").type("11").should("have.value", "11");
     cy.contains("Добавить").click();
-    cy.get("[class*=circle_content]").as("circle-content");
+    cy.get(circleContainer).as("circle-content");
     cy.get("@circle-content")
       .should("have.length", 7)
       .each((item, index) => {
@@ -20,8 +20,8 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("head");
           expect(item).to.contain("tail");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(210, 82, 225)");
+            .find(circle)
+            .should("have.css", "border",colorBorderChanging );
         }
       });
     cy.wait(1000);
@@ -34,15 +34,15 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("tail");
 
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(0, 50, 255)");
+            .find(circle)
+            .should("have.css", "border", colorBorderDefoult);
         }
       });
     cy.get("input").should("have.value", "");
     ////////////////////////первый добавлен
     cy.get("input").type("22").should("have.value", "22");
     cy.contains("Добавить").click();
-    cy.get("[class*=circle_content]").as("circle-content");
+    cy.get(circleContainer).as("circle-content");
     cy.get("@circle-content")
       .should("have.length", 7)
       .each((item, index) => {
@@ -54,8 +54,8 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("22");
           expect(item).to.contain("tail");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(210, 82, 225)");
+            .find(circle)
+            .should("have.css", "border", colorBorderChanging);
         }
       });
     cy.wait(1000);
@@ -70,15 +70,15 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("22");
           expect(item).to.contain("tail");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(0, 50, 255)");
+            .find(circle)
+            .should("have.css", "border", colorBorderDefoult);
         }
       });
     cy.get("input").should("have.value", "");
     //////////////////////// второй добавлен
     cy.get("input").type("33").should("have.value", "33");
     cy.contains("Добавить").click();
-    cy.get("[class*=circle_content]").as("circle-content");
+    cy.get(circleContainer).as("circle-content");
     cy.get("@circle-content")
       .should("have.length", 7)
       .each((item, index) => {
@@ -93,8 +93,8 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("33");
           expect(item).to.contain("tail");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(210, 82, 225)");
+            .find(circle)
+            .should("have.css", "border", colorBorderChanging);
         }
       });
     cy.wait(1000);
@@ -112,8 +112,8 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("33");
           expect(item).to.contain("tail");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(0, 50, 255)");
+            .find(circle)
+            .should("have.css", "border", colorBorderDefoult);
         }
       });
     cy.get("input").should("have.value", "");
@@ -138,8 +138,8 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("11");
           expect(item).to.contain("head");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(210, 82, 225)");
+            .find(circle)
+            .should("have.css", "border", colorBorderChanging);
         }
         if (index === 1) {
           expect(item).to.contain("22");
@@ -156,8 +156,8 @@ describe("Проверьте, правильность добавления эл
         if (index === 0) {
           expect(item).to.contain("");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(0, 50, 255)");
+            .find(circle)
+            .should("have.css", "border", colorBorderDefoult);
         }
         if (index === 1) {
           expect(item).to.contain("22");
@@ -171,7 +171,7 @@ describe("Проверьте, правильность добавления эл
     cy.get("input").should("have.value", "");
     ///////////////////первый удален
     cy.contains("Удалить").click();
-    cy.get("[class*=circle_content]").as("circle-content");
+    cy.get(circleContainer).as("circle-content");
     cy.get("@circle-content")
       .should("have.length", 7)
       .each((item, index) => {
@@ -179,8 +179,8 @@ describe("Проверьте, правильность добавления эл
           expect(item).to.contain("22");
           expect(item).to.contain("head");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(210, 82, 225)");
+            .find(circle)
+            .should("have.css", "border", colorBorderChanging);
         }
         if (index === 2) {
           expect(item).to.contain("33");
@@ -194,8 +194,8 @@ describe("Проверьте, правильность добавления эл
         if (index === 1) {
           expect(item).to.contain("");
           cy.get(item)
-            .find("[class*=circle_circle]")
-            .should("have.css", "border", "4px solid rgb(0, 50, 255)");
+            .find(circle)
+            .should("have.css", "border", colorBorderDefoult);
         }
         if (index === 2) {
           expect(item).to.contain("head");
@@ -218,7 +218,7 @@ describe("Проверьте, правильность добавления эл
     cy.wait(1000)
 
     cy.contains("Очистить").click();
-    cy.get("[class*=circle_content]").as("circle-content");
+    cy.get(circleContainer).as("circle-content");
     cy.get("@circle-content")
       .should("have.length", 7)
       .each((item) => {   
