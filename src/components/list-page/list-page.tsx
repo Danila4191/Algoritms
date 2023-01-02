@@ -21,7 +21,7 @@ export const ListPage: React.FC = () => {
   
   useEffect(() => {
     arrKeys.push("smalCircle");
-    createArrRandom(0, 10000, 4, 6, setArr, arrKeys);
+    createArrRandom(0, 10000, 5, 5, setArr, arrKeys);
   }, []);
 
 

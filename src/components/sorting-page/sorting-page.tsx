@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./sorting.module.css";
 import { RadioInput } from "../ui/radio-input/radio-input";
 import { Button } from "../ui/button/button";
@@ -8,6 +8,8 @@ import { ElementStates, arrSortingnumbers } from "../../types/types";
 import { arrKeys } from "../../utils/constants";
 import { Column } from "../ui/column/column";
 import { createArrRandom } from "../../utils/functions";
+import { sortBubble } from "../../utils/boobleSort";
+
 export const SortingPage: React.FC = () => {
   const [arrRandom, setArrRandom] = useState<arrSortingnumbers[]>([]);
   const [sortVariable, setSortVariable] = useState("");
@@ -23,14 +25,22 @@ export const SortingPage: React.FC = () => {
         sortChoice(arrCopy, 0, 0, 0, 0, sortVariable, 0, 0);
       }
     } else if (activeInput == "Пузырек") {
-      sortBubble(arrCopy, 0, 1, sortVariable, arrCopy.length);
+      sortBubble(
+        arrCopy,
+        sortVariable,
+        arrCopy.length,
+        setArrRandom,
+        setloading
+      );
+
     }
   };
 
   useEffect(() => {
-    createArrRandom(0, 100, 3, 17, setArrRandom, arrKeys)
+    createArrRandom(0, 100, 3, 17, setArrRandom, arrKeys);
   }, []);
   //////////////////////////////////////////////////////////////////
+  /*
   const sortBubble = (
     arr: arrSortingnumbers[],
     index: number,
@@ -210,7 +220,7 @@ export const SortingPage: React.FC = () => {
         }
       }
     }
-  };
+  };*/
   /////////////////////////////////////////////////////////////////////////////////////////////////
   function sortChoice(
     arr: arrSortingnumbers[],

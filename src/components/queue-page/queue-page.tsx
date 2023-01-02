@@ -24,8 +24,7 @@ export const QueuePage: React.FC = () => {
   const [lengthState, setlengthState] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
-  //Тут компоненты тесно связанны с классами из-за использования стейтов.
-  //Как мне кажется лучше оставить их здесь, чтобы не усложнять логику страницы.
+
   class Queue<T> implements IQueue<T> {
     private container: (arrString | null)[] = [];
     private head = headState;

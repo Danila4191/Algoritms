@@ -37,3 +37,6 @@ export const createArrRandom = (
     func(getArrStates3(arrKeys, arr));
   }
 };
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
